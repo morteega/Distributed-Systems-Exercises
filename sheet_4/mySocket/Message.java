@@ -1,16 +1,16 @@
+package sheet_4.mySocket;
 import java.io.*;
 
 public class Message implements Serializable {
-    String fundId;
+    String fundName;
     String method;
-    private String 
 
     public Message(String fundName, String method){
-        this.fundId=fundName;
+        this.fundName=fundName;
         this.method=method;
     }
     public String getFundName(){
-        return this.fundId;
+        return this.fundName;
     }
     public String getMethod(){
         return this.method;

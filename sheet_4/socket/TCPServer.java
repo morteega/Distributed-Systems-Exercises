@@ -4,7 +4,6 @@ import java.io.*;
 import sheet_3.Funds;
 
 public class TCPServer {
-  private Funds funds;
   public static void main (String args[]) {
     try{
       System.out.println("The Server is running");

@@ -1,10 +1,12 @@
 
 import java.net.*;
+
+import sheet_4.mySocket.FundProxy;
+
 import java.io.*;
 
 public class TCPClient {
-	private FundProxy fundProxy;
-	static Message message;
+	 FundProxy fundProxy;
   public static void main (String args[]) {
   // args[0]: Message
   // args[1]: Server
@@ -14,7 +16,7 @@ public class TCPClient {
 	  Socket s = new Socket (args[1], serverPort);
 	  ObjectOutputStream out = new ObjectOutputStream ( s.getOutputStream());
 	  ObjectInputStream in = new ObjectInputStream ( s.getInputStream());
-	  out.writeObject (message); 
+
 	  Object data = in.readObject();
 	  System. out.println("Received: "+ data) ;
 	  s.close();
