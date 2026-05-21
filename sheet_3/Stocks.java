@@ -6,11 +6,13 @@ public class Stocks implements Serializable {
     private String name;
     private double dividend;
     private double quantity;
+    private static final long serialVersionUID = 1L;
 
     public Stocks(String name, double dividend, double quantity){
         this.name = name;
         this.dividend = dividend;
         this.quantity = quantity;
+        
     }
     public String getName() {
         return name;

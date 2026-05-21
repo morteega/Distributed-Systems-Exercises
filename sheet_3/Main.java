@@ -12,6 +12,11 @@ public class Main {
         fund.addStock("Tesla", 6,39);
         fund.addStock("Apple", 3, 50);
 
+        System.out.println(fund.getStockFromFileByName("sheet_3/fund_old_version.ser","MSCI" ).toString()+"\n\n");
+
+        //fund.saveFundToFile("fund.ser");
+        Funds loadedFund = fund.loadFundFromFile("sheet_3/fund_stocks_with_market.ser");
+        System.out.println("\n Loaded Fund:\n"+ loadedFund.getName()+ "\n"+ loadedFund.getStocks().toString());
         System.out.println("\n \nNumber of stocks with dividend over 5: " + calculateNumberStocksDividendOver5(fund)+"\n");
         System.out.println("Number of all separate stocks with dividend over 5: " + calculateNumberallSeparateStocksDividendOver5(fund) + "\n");
         getStockByName(fund, "Tesla");
