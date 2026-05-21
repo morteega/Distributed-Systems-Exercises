@@ -15,17 +15,17 @@ public class FundProxy{
     }
 
     public Stocks getStockByName(String name){
-        Message message = new Message(this.name, "getStockByName");
+        Message message = new Message(this.name, "getStockByName", new Object[]{name});
         return sendRequest(message);
     }
 
     public void addStock(){
-        Message message = new Message(this.name, "addStock");
+        Message message = new Message(this.name, "addStock", new Object[]{});
         sendRequest(message);
     }
 
     public List<Stocks> getStocks(){
-        Message message = new Message(this.name, "getStocks");
+        Message message = new Message(this.name, "getStocks", new Object[]{});
         return sendRequestList(message);
     }
 
@@ -43,7 +43,6 @@ public class FundProxy{
             return null;
         }
     }
-    @SuppressWarnings("unchecked")
     private List<Stocks> sendRequestList(Message message){
         try{
             Socket socket= new Socket("localhost", this.portNumber);

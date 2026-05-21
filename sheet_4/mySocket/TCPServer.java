@@ -18,9 +18,11 @@ public class TCPServer {
         try{
             int serverPort = 7896;
             ServerSocket listenSocket = new ServerSocket(serverPort);
+            System.out.println("Server is listening on port " + serverPort);
             while(true) {
                 Socket clientSocket = listenSocket.accept();
-                new Connection(clientSocket, fund1, fund2);
+                System.out.println("New client connected: " + clientSocket.getInetAddress().getHostAddress());
+                new Connection(clientSocket, fund1, fund2).run();
             }
         }catch(IOException e){
             System.out.println("Listen :"+e.getMessage());

@@ -1,6 +1,6 @@
 package sheet_4.mySocket;
 
-import sheet_3.Funds;
+import sheet_3.*;
 import java.io.*;
 import java.net.*;
 
@@ -13,7 +13,6 @@ public class Connection extends Thread{
         this.clientSocket = clientSocket;
         this.fund1 = fund1;
         this.fund2 = fund2;
-        start();
     }
 
     public void run(){
@@ -24,9 +23,13 @@ public class Connection extends Thread{
             switch(message.getMethod()){
                 case "getStockByName":
                     if(message.getFundName().equals(fund1.getName())){
-                        out.writeObject(fund1.getStockByName("Nvidia"));
+                        out.writeObject(fund1.getStockByName((String) message.getParameters()[0]));
+                        out.flush();
+                        System.out.println("It is working"+fund1.getStockByName((String) message.getParameters()[0]));
                     }else if(message.getFundName().equals(fund2.getName())){
-                        out.writeObject(fund2.getStockByName("Nvidia"));
+                        out.writeObject(fund2.getStockByName((String) message.getParameters()[0]));
+                        out.flush();
+                        System.out.println("It is working"+fund2.getStockByName((String) message.getParameters()[0]));
                     }else{
                         out.writeObject(null);
                     }
@@ -36,6 +39,7 @@ public class Connection extends Thread{
                         fund1.addStock("Apple",100, 0.5);
                     }else if(message.getFundName().equals(fund2.getName())){
                         fund2.addStock("Apple",100, 0.5);
+                        System.out.println("Stock added to " + message.getFundName());
                     }
                     break;
                 case "getStocks":

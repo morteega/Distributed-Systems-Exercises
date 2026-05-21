@@ -1,8 +1,8 @@
 package sheet_3;
 
+import java.io.*; 
 
-
-public class Stocks {
+public class Stocks implements Serializable {
     private String name;
     private double dividend;
     private double quantity;
@@ -23,5 +23,8 @@ public class Stocks {
     }
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+    public String toString(){
+        return "Stock: " + this.name + ", Dividend: " + this.dividend + ", Quantity: " + this.quantity;
     }
 }
