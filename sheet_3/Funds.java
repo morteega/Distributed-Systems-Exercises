@@ -74,4 +74,11 @@ public class Funds implements Serializable{
             return null;
         }
     }
+    public String toString(){
+        String string="";
+        for(int i=0; i<this.stocks.size();i++){
+            string+=this.stocks.get(i).toString();
+        }
+        return string;
+    }
 }

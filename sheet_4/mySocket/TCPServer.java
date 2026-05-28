@@ -17,15 +17,15 @@ public class TCPServer {
         fund2.addStock("Apple", 3, 50);
         try{
             int serverPort = 7896;
-            ServerSocket listenSocket = new ServerSocket(serverPort);
-            System.out.println("Server is listening on port " + serverPort);
+            ServerSocket serverSocket = new ServerSocket(serverPort);
+            System.out.println("Server is listening on port: "+serverPort+"\n");
             while(true) {
-                Socket clientSocket = listenSocket.accept();
-                System.out.println("New client connected: " + clientSocket.getInetAddress().getHostAddress());
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("New connection\n");
                 new Connection(clientSocket, fund1, fund2).run();
             }
         }catch(IOException e){
-            System.out.println("Listen :"+e.getMessage());
+            System.out.println("Listen :\n"+e.getMessage());
         }
     }
 

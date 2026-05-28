@@ -14,22 +14,22 @@ public class FundProxy{
         this.portNumber = portNumber;
     }
 
-    public Stocks getStockByName(String name){
-        Message message = new Message(this.name, "getStockByName", new Object[]{name});
-        return sendRequest(message);
+    public Stocks getStockByName(String stockName){
+        Message message = new Message(this.name, "getStockByName", new Object[]{stockName});
+        return sendGetStockByNameRequest(message);
     }
 
-    public void addStock(){
-        Message message = new Message(this.name, "addStock", new Object[]{});
-        sendRequest(message);
+    public void addStock(String stockName){
+        Message message = new Message(this.name, "addStock", new Object[]{stockName});
+        sendAddStockRequest(message);
     }
 
     public List<Stocks> getStocks(){
         Message message = new Message(this.name, "getStocks", new Object[]{});
-        return sendRequestList(message);
+        return this.sendGetListOfStocksRequest(message);
     }
 
-    private Stocks sendRequest(Message message){
+    private Stocks sendGetStockByNameRequest(Message message){
         try{
             Socket socket= new Socket("localhost", this.portNumber);
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -38,24 +38,36 @@ public class FundProxy{
             Stocks stock = (Stocks) in.readObject();
             socket.close();
             return stock;
-        }catch(Exception e){
-            e.printStackTrace();
-            return null;
+        }catch(IOException e){System.out.println(e.getMessage()); 
+        }catch(ClassNotFoundException e){System.out.println(e.getMessage());
         }
+        return null;
     }
-    private List<Stocks> sendRequestList(Message message){
+    private void sendAddStockRequest(Message message){
         try{
             Socket socket= new Socket("localhost", this.portNumber);
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             out.writeObject(message);
-            List<Stocks> stocks = (List<Stocks>)in.readObject();
             socket.close();
-            return stocks;
-        }catch(Exception e){
-            e.printStackTrace();
-            return null;
+            System.out.println("Stock added succesfully to fund: "+this.name+" \n\n");
+        }catch(IOException e){System.out.println(e.getMessage()); 
         }
+    }
+    private List<Stocks> sendGetListOfStocksRequest(Message message){
+        try{
+            Socket socket = new Socket("localhost", this.portNumber);
+            ObjectOutputStream out=new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream in= new ObjectInputStream(socket.getInputStream());
+            out.writeObject(message);
+            List<Stocks> readList= (List<Stocks>) in.readObject();
+            System.out.println("List from: "+this.name+" read succesfully\n");
+            System.out.println("\n"+readList.toString()+"\n\n");
+            socket.close();
+            return readList;
+        }catch(IOException e){System.out.println(e.getMessage());}
+        catch(ClassNotFoundException e){System.out.println(e.getMessage());
+        }
+        return null;
     }
     
 }

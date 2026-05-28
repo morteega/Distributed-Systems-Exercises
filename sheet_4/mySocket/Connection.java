@@ -25,23 +25,23 @@ public class Connection extends Thread{
                     if(message.getFundName().equals(fund1.getName())){
                         out.writeObject(fund1.getStockByName((String) message.getParameters()[0]));
                         out.flush();
-                        System.out.println("It is working"+fund1.getStockByName((String) message.getParameters()[0]));
+                        System.out.println("It is working \n"+fund1.getStockByName((String) message.getParameters()[0]));
                     }else if(message.getFundName().equals(fund2.getName())){
                         out.writeObject(fund2.getStockByName((String) message.getParameters()[0]));
                         out.flush();
-                        System.out.println("It is working"+fund2.getStockByName((String) message.getParameters()[0]));
+                        System.out.println("It is working \n" + fund2.getStockByName((String) message.getParameters()[0]));
                     }else{
                         out.writeObject(null);
                     }
                     break;
                 case "addStock":
+                    String stockName= (String)message.getParameters()[0];
                     if(message.getFundName().equals(fund1.getName())){
-                        fund1.addStock("Apple",100, 0.5);
+                        fund1.addStock(stockName,100, 0.5);
                     }else if(message.getFundName().equals(fund2.getName())){
-                        fund2.addStock("Apple",100, 0.5);
-                        System.out.println("Stock added to " + message.getFundName());
+                        fund2.addStock(stockName,100, 0.5);
                     }
-                    break;
+                    break;    
                 case "getStocks":
                     if(message.getFundName().equals(fund1.getName())){
                         out.writeObject(fund1.getStocks());
@@ -54,9 +54,10 @@ public class Connection extends Thread{
             }
             
             clientSocket.close();
-        }catch(Exception e){
-            e.printStackTrace();
-    
-        }   
+        }catch(IOException e){
+            e.getMessage();
+        }catch(ClassNotFoundException e){
+            System.out.println(e.getMessage());
+        }  
     }
 }
