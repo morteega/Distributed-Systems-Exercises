@@ -1,4 +1,3 @@
-package sheet_3;
 
 import java.util.List;
 import java.io.*;

@@ -1,0 +1,22 @@
+{
+  "java.project.sourcePaths": [
+    "sheet_5/a6/src",
+    "sheet_3"
+  ],
+  "java.project.outputPath": "sheet_5/a6/WEB-INF/classes",
+  "java.project.referencedLibraries": [
+    "/Users/mortega/Tomcat/apache-tomcat-9.0.118/lib/servlet-api.jar",
+    "sheet_5/a6/WEB-INF/classes"
+  ],
+
+  "editor.inlineSuggest.enabled": false,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.wordBasedSuggestions": "matchingDocuments",
+  "editor.snippetSuggestions": "bottom",
+  "editor.parameterHints.enabled": true
+}

@@ -1,5 +1,3 @@
-package sheet_3;
-
 import java.io.*; 
 
 public class Stocks implements Serializable {
