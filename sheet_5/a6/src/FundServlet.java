@@ -61,6 +61,15 @@ public class FundServlet extends HttpServlet{
             out.println("<body>");
             out.println("<p>Stock added succesfully</p>");
             out.flush(); 
+        }else if(method.equals("changeQuantity")){
+            String stockname=(String) request.getParameter("stock");
+            double newQuantity= Double.parseDouble(request.getParameter("quantity"));
+            Stocks stock=fund.getStockByName(stockname);
+            stock.setQuantity(newQuantity);
+            out.println("<html>");
+            out.println("<body>");
+            out.println("<p>Stock Quantity changed succesfully</p>");
+            out.flush();
         }
     }
     

@@ -32,5 +32,16 @@
                 <input type="text" name="stock">
                 <button type="submit">Find Stock</button>
         </form>
+        <h3>
+            Change Quantity of a certain Stock
+        </h3>
+        <form action="Funds" method="post">
+            <input type="hidden" name="task" value="changeQuantity">
+            <label>Stock name</label>
+            <input type="text" name="stock">
+            <label>New Quantity:</label>
+            <input type="number" step="0.01" name="quantity">
+            <button type="submit">Change Quantity</button>
+        </form>
     </body>
 </html>
