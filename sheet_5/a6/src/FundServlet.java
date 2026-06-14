@@ -18,25 +18,24 @@ public class FundServlet extends HttpServlet{
         ServletContext context= getServletContext();
         this.fund=(Funds) context.getAttribute("fund");
         if(fund==null){
-            this.fund= new Funds("fund1", new ArrayList<Stocks>(List.of(new Stocks("Apple", 0, 0),
+            this.fund= new Funds("fund1", new ArrayList<Stocks>(List.of(new Stocks("Apple", 15, 50),
             new Stocks("Nvidia",0,0))));
             context.setAttribute("fund", this.fund);
         }
 
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        String task= (String) request.getParameter("task");
-        String stockName=(String) request.getParameter("stock");
-        Stocks stock= fund.getStockByName(stockName);
-        if("findStock".equals(task)){
-            response.setContentType("text/html");
-            PrintWriter out= response.getWriter();
+        String method= (String) request.getParameter("task");
+        response.setContentType("text/html");
+        PrintWriter out=response.getWriter();
+        if(method.equals("findStock")){
+            String sotckName=(String) request.getParameter("stock");
+            Stocks stock=fund.getStockByName(sotckName);
             out.println("<html>");
             out.println("<body>");
-            out.println("<h1>Stock searched</h1>");
-            out.println("<p>"+ stock.getName()+"\n"+ stock.getQuantity()+ "\n"+ stock.getDividend()+"</p>");
-            out.println("</body>");
-            out.println("</hmtl>");
+            out.println("<p>Stock Found Succesfully<br></p>");
+            out.println("<p>"+ stock.getName()+"<br>"+stock.getQuantity()+"<br>"+stock.getDividend()+"</p");
+            out.flush();
         }
         
     }
