@@ -36,8 +36,32 @@ public class FundServlet extends HttpServlet{
             out.println("<p>Stock Found Succesfully<br></p>");
             out.println("<p>"+ stock.getName()+"<br>"+stock.getQuantity()+"<br>"+stock.getDividend()+"</p");
             out.flush();
+        }else if(method.equals("addStock")){
+            String sotckName= (String) request.getParameter("stock");
+            double quantity=Double.parseDouble(request.getParameter("quantity"));
+            double dividend=Double.parseDouble(request.getParameter("dividend"));
+            fund.addStock(sotckName, dividend, quantity);
+            out.println("<html>");
+            out.println("<body>");
+            out.println("<p>Stock added succesfully</p>");
+            out.flush();
         }
         
+    }
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String method= (String) request.getParameter("task");
+        response.setContentType("text/html");
+        PrintWriter out=response.getWriter();
+        if(method.equals("addStock")){
+            String sotckName= (String) request.getParameter("stock");
+            double quantity=Double.parseDouble(request.getParameter("quantity"));
+            double dividend=Double.parseDouble(request.getParameter("dividend"));
+            fund.addStock(sotckName, dividend, quantity);
+            out.println("<html>");
+            out.println("<body>");
+            out.println("<p>Stock added succesfully</p>");
+            out.flush(); 
+        }
     }
     
 }
