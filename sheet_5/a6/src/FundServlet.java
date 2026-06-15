@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.servlet.http.*;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
@@ -36,15 +35,15 @@ public class FundServlet extends HttpServlet{
             out.println("<p>Stock Found Succesfully<br></p>");
             out.println("<p>"+ stock.getName()+"<br>"+stock.getQuantity()+"<br>"+stock.getDividend()+"</p");
             out.flush();
-        }else if(method.equals("addStock")){
-            String sotckName= (String) request.getParameter("stock");
-            double quantity=Double.parseDouble(request.getParameter("quantity"));
-            double dividend=Double.parseDouble(request.getParameter("dividend"));
-            fund.addStock(sotckName, dividend, quantity);
+        }else if(method.equals("findAllStocks")){
             out.println("<html>");
             out.println("<body>");
-            out.println("<p>Stock added succesfully</p>");
-            out.flush();
+            out.println("<p>Stocks Found Succesfully<br></p>");
+            List<Stocks> stocks= this.fund.getStocks();
+            for(int i=0;i<this.fund.getStocks().size();i++){
+                out.println("<p>"+stocks.get(i).getName()+"<br>"+stocks.get(i).getQuantity()+"<br"+stocks.get(i).getDividend()+"</p>");
+                out.flush();
+            }
         }
         
     }

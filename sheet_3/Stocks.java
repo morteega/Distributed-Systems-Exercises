@@ -27,4 +27,7 @@ public class Stocks implements Serializable {
     public String toString(){
         return "Stock: " + this.name + ", Dividend: " + this.dividend + ", Quantity: " + this.quantity;
     }
+    public void setDividend(double dividend){
+        this.dividend=dividend;
+    }
 }

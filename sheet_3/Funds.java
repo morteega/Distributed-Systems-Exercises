@@ -19,7 +19,13 @@ public class Funds implements Serializable{
         return null;
     }    
     public void addStock(String name, double dividend, double quantity){
-        this.stocks.add(new Stocks(name, dividend, quantity));
+        if(this.getStockByName(name)!=null){
+            this.getStockByName(name).setQuantity(this.getStockByName(name).getQuantity()+quantity);
+            this.getStockByName(name).setDividend(dividend);
+        }else{
+            Stocks stock = new Stocks(name,dividend,quantity);
+            this.stocks.add(stock);
+        }
     }
     public List<Stocks> getStocks() {
         return this.stocks;
