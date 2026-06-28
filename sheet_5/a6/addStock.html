@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>
+            Add Stock
+        </h1>
+        <form action="Funds" method="POST">
+            <input type="hidden" name="task" value="addStock"> <!--hacer varios forms, uno para addStock, otro para findStock....-->
+                <label>Stock name:</label>
+                <input type="text" name="stock">
+
+                <label>Quantity:</label>
+                <input type="number" name="quantity">
+
+                <label>Dividend:</label>
+                <input type="number" step="0.01" name="dividend">
+                <button type="submit">Add Stock</button>
+        </form>
+        <h3>
+            Back to Menu
+        </h3>
+        <ul>
+            <li><a href="index.html">Menu</a></li>
+        </ul>
+    </body>
+</html>

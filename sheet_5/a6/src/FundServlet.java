@@ -21,55 +21,73 @@ public class FundServlet extends HttpServlet{
             new Stocks("Nvidia",0,0))));
             context.setAttribute("fund", this.fund);
         }
-
     }
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        String method= (String) request.getParameter("task");
+    public void doGet(HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException{
+        String method=(String)request.getParameter("task");
+        PrintWriter out= response.getWriter();
         response.setContentType("text/html");
-        PrintWriter out=response.getWriter();
         if(method.equals("findStock")){
-            String sotckName=(String) request.getParameter("stock");
-            Stocks stock=fund.getStockByName(sotckName);
+            String stockName=(String) request.getParameter("stock");
+            Stocks stock=this.fund.getStockByName(stockName);
             out.println("<html>");
             out.println("<body>");
             out.println("<p>Stock Found Succesfully<br></p>");
             out.println("<p>"+ stock.getName()+"<br>"+stock.getQuantity()+"<br>"+stock.getDividend()+"</p");
+            out.println("<h3>\n" +
+                                "            Back to Menu\n" +
+                                "        </h3>\n" + 
+                                "        <ul>\n" + 
+                                "            <li><a href=\"index.html\">Menu</a></li>\n" + 
+                                "        </ul>");
             out.flush();
         }else if(method.equals("findAllStocks")){
+            List<Stocks> list=this.fund.getStocks();
             out.println("<html>");
             out.println("<body>");
             out.println("<p>Stocks Found Succesfully<br></p>");
-            List<Stocks> stocks= this.fund.getStocks();
-            for(int i=0;i<this.fund.getStocks().size();i++){
-                out.println("<p>"+stocks.get(i).getName()+"<br>"+stocks.get(i).getQuantity()+"<br"+stocks.get(i).getDividend()+"</p>");
-                out.flush();
+            for(int i=0;i<list.size();i++){
+                out.println("<p><br>"+list.get(i).getName()+"<br>"+list.get(i).getQuantity()+"<br>"+list.get(i).getDividend());
             }
-        }
-        
-    }
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        String method= (String) request.getParameter("task");
-        response.setContentType("text/html");
-        PrintWriter out=response.getWriter();
-        if(method.equals("addStock")){
-            String sotckName= (String) request.getParameter("stock");
-            double quantity=Double.parseDouble(request.getParameter("quantity"));
-            double dividend=Double.parseDouble(request.getParameter("dividend"));
-            fund.addStock(sotckName, dividend, quantity);
-            out.println("<html>");
-            out.println("<body>");
-            out.println("<p>Stock added succesfully</p>");
-            out.flush(); 
-        }else if(method.equals("changeQuantity")){
-            String stockname=(String) request.getParameter("stock");
-            double newQuantity= Double.parseDouble(request.getParameter("quantity"));
-            Stocks stock=fund.getStockByName(stockname);
-            stock.setQuantity(newQuantity);
-            out.println("<html>");
-            out.println("<body>");
-            out.println("<p>Stock Quantity changed succesfully</p>");
+            out.println("<h3>\n" +
+                                "            Back to Menu\n" +
+                                "        </h3>\n" + 
+                                "        <ul>\n" + 
+                                "            <li><a href=\"index.html\">Menu</a></li>\n" + 
+                                "        </ul>");
             out.flush();
         }
     }
-    
+    public void doPost(HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException{
+        String method=(String)request.getParameter("task");
+        PrintWriter out=response.getWriter();
+        response.setContentType("text/html");
+        if("addStock".equals(method)){
+            String stockName= (String) request.getParameter("stock");
+            Double quantity=Double.parseDouble((String)request.getParameter("quantity"));
+            Double dividend=Double.parseDouble((String)request.getParameter("dividend"));
+            this.fund.addStock(stockName,dividend,quantity);
+            out.println("<p>Stock added succesfully</p>");
+            out.println("<h3>\n" +
+                                "            Back to Menu\n" +
+                                "        </h3>\n" + 
+                                "        <ul>\n" + 
+                                "            <li><a href=\"index.html\">Menu</a></li>\n" + 
+                                "        </ul>");
+            out.flush();
+        }else if(method.equals("changeQuantity")){
+            Double newQuantity=Double.parseDouble((String) request.getParameter("quantity"));
+            String stockName=(String) request.getParameter("stock");
+            Stocks stock=fund.getStockByName(stockName);
+            stock.setQuantity(newQuantity);
+            out.println("<p>Quantity changed succesfully</p>");
+            out.println("<h3>\n" +
+                                "            Back to Menu\n" +
+                                "        </h3>\n" + 
+                                "        <ul>\n" + 
+                                "            <li><a href=\"index.html\">Menu</a></li>\n" + 
+                                "        </ul>");
+            out.flush();
+        }
+    }
+
 }

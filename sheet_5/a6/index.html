@@ -7,48 +7,11 @@
         <h2>
             Please select an option
         </h2>
-        <h3>
-            Add Stock
-        </h3>
-        <form action="Funds" method="post">
-            <input type="hidden" name="task" value="addStock"> <!--hacer varios forms, uno para addStock, otro para findStock....-->
-                <label>Stock name:</label>
-                <input type="text" name="stock">
-
-                <label>Quantity:</label>
-                <input type="number" name="quantity">
-
-                <label>Dividend:</label>
-                <input type="number" step="0.01" name="dividend">
-                <button type="submit">Add Stock</button>
-
-        </form>
-        <h3>
-            Find Stock
-        </h3>
-        <form action="Funds" method="get">
-            <input type="hidden" name="task" value="findStock">
-                <label>Stock name:</label>
-                <input type="text" name="stock">
-                <button type="submit">Find Stock</button>
-        </form>
-        <h3>
-            Change Quantity of a certain Stock
-        </h3>
-        <form action="Funds" method="post">
-            <input type="hidden" name="task" value="changeQuantity">
-            <label>Stock name</label>
-            <input type="text" name="stock">
-            <label>New Quantity:</label>
-            <input type="number" step="0.01" name="quantity">
-            <button type="submit">Change Quantity</button>
-        </form>
-        <h3>
-            Get All Stocks
-        </h3>
-        <form action="Funds" method="get">
-            <input type="hidden" name="task" value="findAllStocks">
-            <button type="submit">Find Stocks</button>
-        </form>
+            <ul>
+                <li><a href="addStock.html">Add Stock</a></li>
+                <li><a href="findStock.html">Find Concrete Stock</a></li>
+                <li><a href="findAllStocks.html">Find All Stocks</a></li>
+                <li><a href="changeQuantity.html">Change Quantity of a Stock</a></li>
+            </ul>
     </body>
 </html>
