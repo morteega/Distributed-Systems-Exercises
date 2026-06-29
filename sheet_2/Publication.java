@@ -1,4 +1,3 @@
-package sheet_2;
 
 public class Publication implements Display {
     private String title;

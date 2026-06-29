@@ -1,4 +1,3 @@
-package sheet_2;
 
 import java.util.*;
 

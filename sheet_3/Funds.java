@@ -86,4 +86,8 @@ public class Funds implements Serializable{
         }
         return string;
     }
+    public void showStocks(){
+        String stocks=this.toString();
+        System.out.println(stocks);
+    }
 }

@@ -1,12 +1,15 @@
 {
   "java.project.sourcePaths": [
+    "sheet_6/src",
     "sheet_5/a6/src",
-    "sheet_3"
+    "sheet_3",
+    "sheet_2"
   ],
   "java.project.outputPath": "sheet_5/a6/WEB-INF/classes",
   "java.project.referencedLibraries": [
     "/Users/mortega/Tomcat/apache-tomcat-9.0.118/lib/servlet-api.jar",
-    "sheet_5/a6/WEB-INF/classes"
+    "sheet_5/a6/WEB-INF/classes",
+    "sheet_6/lib/*.jar"
   ],
 
   "editor.inlineSuggest.enabled": false,

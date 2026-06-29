@@ -1,4 +1,4 @@
-package sheet_2;
+
 
 public class Book extends Publication {
     private String author;
