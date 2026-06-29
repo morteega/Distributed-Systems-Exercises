@@ -8,9 +8,6 @@ import java.util.ArrayList;
 public class SecondarySystem {
     private Funds replicaFund;
 
-    private void run(){
-
-    }
     private void receiveMessages(String queueName)throws NamingException, JMSException{
         Context initialContext= new InitialContext();
         QueueConnectionFactory connectionFactory= (QueueConnectionFactory)initialContext.lookup("ConnectionFactory");
