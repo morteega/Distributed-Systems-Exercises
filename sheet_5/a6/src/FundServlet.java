@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 public class FundServlet extends HttpServlet{
     private Funds fund;
 
-    public void init() throws ServletException{
+    public void init() throws ServletException{ //Este init lo llama Tomcat automaticamente
         ServletContext context= getServletContext();
         this.fund=(Funds) context.getAttribute("fund");
         if(fund==null){

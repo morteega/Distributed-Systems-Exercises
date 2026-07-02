@@ -10,24 +10,35 @@ import java.util.Scanner;
 
 public class PrimarySystem {
     private Funds fund;
+    private Scanner scanner;
 
     public PrimarySystem(){
         this.fund=new Funds("MainFund", new ArrayList<Stocks>());
+        this.scanner = new Scanner(System.in);
     }
-    public void run()throws NamingException, JMSException{
+    public void run(){
         this.showMenu();
         int choice=this.request();
-        if(choice==1){
-            String message=this.chooseStock();
-            this.sendMessageToSecondary(message);
-        }else if(choice==2){
-            this.fund.showStocks();
+        while(true && choice!=3){
+            if(choice==1){
+                try{
+                String message=this.chooseStock();
+                this.sendMessageToSecondary(message);
+                String[] stock=this.splitString(message);
+                this.fund.addStock(stock[0],Double.parseDouble(stock[1]),Double.parseDouble(stock[2]));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            }else if(choice==2){
+                this.fund.showStocks();
+            }
+            this.showMenu();
+            choice=this.request();
         }
     }
     
-    private void sendMessageToSecondary(String messageText) throws NamingException, JMSException{
-        Context context =  new InitialContext(); //para conseguir los recursos con el NamingService, no haria falta si suoiese que ConnectionFactory voy a usar 
-        QueueConnectionFactory connectionFactory= (QueueConnectionFactory) context.lookup("ConnectionFactory");
+    private void sendMessageToSecondary(String messageText) throws NamingException, JMSException{ //para conseguir los recursos con el NamingService, no haria falta si suoiese que ConnectionFactory voy a usar 
+        QueueConnectionFactory connectionFactory=new ActiveMQConnectionFactory("tcp://localhost:61616");
         QueueConnection connection= connectionFactory.createQueueConnection();
         connection.start();
         QueueSession session=connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -46,20 +57,22 @@ public class PrimarySystem {
         System.out.println("\n 1. Add new Stock: \n 2. View all Stocks: \n 3. Exit  \n Enter a valid number: 1, 2, 3\n");
     }
     private int request(){
-        Scanner scanner = new Scanner(System.in);
-        int result=scanner.nextInt();
-        while(result!=3){
-            System.out.println("\n Please enter a valid number: 1, 2, 3");
-            result= scanner.nextInt();
+        int result=this.scanner.nextInt();
+        this.scanner.nextLine();
+        while(result<1 || result >3){
+            System.out.println("Please enter a valid number\n");
+            result=this.scanner.nextInt();
+            scanner.nextLine();
         }
-        scanner.close();
         return result;
     }
     private String chooseStock(){
         System.out.println("\n Please enter Stock to add with the following format: \n Stock Name;Dividend;Quantity\n");
-        Scanner scanner= new Scanner(System.in);
-        String stocktoAdd=scanner.nextLine();
-        scanner.close();
+        String stocktoAdd=this.scanner.nextLine();
         return stocktoAdd;
+    }
+    private String[] splitString(String message){
+        String[] result=message.split(";");
+        return result;
     }
 }
